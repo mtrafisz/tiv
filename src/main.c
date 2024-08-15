@@ -106,7 +106,7 @@ Array(FileHash) collect_file_hashes(const char* path) {
             Array child_result = collect_file_hashes(child_full_path);
             array_combine(&file_hashes, &child_result);
             array_destroy(&child_result);
-        }
+        } if (errno != 0) log_errno("Error while traversing directory tree", NULL);
 
         closedir(dfd);
 
